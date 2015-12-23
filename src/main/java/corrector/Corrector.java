@@ -53,28 +53,28 @@ public class Corrector {
     }
 
     public String correctString(String checkLine) {
-        String resultString = "";
-        boolean isAnAlphabetLetter, isWordStart;
+        StringBuilder resultString = new StringBuilder("");
+        boolean isAnAlphabetLetter;
         StringBuilder mergeLineSb = new StringBuilder();
         char[] curCharArray = checkLine.toLowerCase().toCharArray();
         for (char curChar : curCharArray) {
             isAnAlphabetLetter = Character.isAlphabetic(curChar);
             if (isAnAlphabetLetter) {
-                isWordStart = true;
                 mergeLineSb.append(curChar);
             } else if (!isAnAlphabetLetter && mergeLineSb.length() > 0) {
                 String transitionalString = mergeLineSb.toString();
-                if (forCheckMap.containsKey(transitionalString)) {
-                    resultString = resultString + forCheckMap.get(transitionalString) + curChar;
+                String checkStr = forCheckMap.get(transitionalString);
+                if (checkStr!= null) {
+                    resultString = resultString.append(checkStr).append(curChar);
                 } else {
-                    resultString = resultString + transitionalString + curChar;
+                    resultString = resultString.append(transitionalString).append(curChar);
                 }
-                isWordStart = false;
+
                 mergeLineSb.setLength(0);
-            } else if (!isAnAlphabetLetter && mergeLineSb.length() == 0) {
-                resultString = resultString + curChar;
+            } else {
+                resultString = resultString.append(curChar);
             }
         }
-        return resultString;
+        return resultString.toString();
     }
 }
