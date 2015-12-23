@@ -11,3 +11,7 @@ Visual representation is not important, but it is an advantage using JavaScript 
 
 Test scenario:
 I will get your code and run 'mvn spring-boot:run'. Next, I will send a text with errors to your REST.
+
+
+I built a service that accepted HTTP POST requests at: localhost:8080/corrected
+and responded with a JSON representation of a corrected text: {"id":1,"content":"Abilty academy zeebra. Abondoned, turnk; substace.","correctedContent":"ability academy zebra. abandoned, turnkey, trunk; substance."}
